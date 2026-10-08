@@ -5,13 +5,9 @@ data class PersonalRecord(
     val exerciseId: Long?,
     val exerciseNameSnapshot: String,
     val recordType: PersonalRecordType,
-    val value: Double,          // kg para MAX_LOAD/ESTIMATED_1RM; repetições para MAX_REPS
+    val value: Double,          // kg para MAX_LOAD/MAX_VOLUME; reps para MAX_REPS; segundos para BEST_TIME
     val reps: Int?,
     val loadKg: Double?,
     val sessionId: Long?,
     val achievedAtEpochMs: Long
 )
-
-/** Fórmula de Epley para 1RM estimado. */
-fun estimateOneRepMaxKg(loadKg: Double, reps: Int): Double =
-    if (reps <= 1) loadKg else loadKg * (1.0 + reps / 30.0)

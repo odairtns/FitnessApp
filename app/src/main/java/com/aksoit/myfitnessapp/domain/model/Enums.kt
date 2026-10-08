@@ -156,7 +156,9 @@ enum class MovementPattern {
 }
 
 enum class PersonalRecordType {
-    MAX_LOAD,        // Maior carga registrada (kg)
-    ESTIMATED_1RM,   // 1RM estimado (Epley) em kg
-    MAX_REPS         // Maior número de repetições numa série
+    MAX_LOAD,               // Maior carga registrada (kg)
+    MAX_REPS,               // Maior número de repetições numa série (reps)
+    MAX_VOLUME,             // Maior volume de carga numa série (kg = load * reps)
+    BEST_TIME,              // Menor tempo / melhor tempo (segundos)
+    BEST_PROTOCOL_RESULT    // Resultado específico de protocolo (ex: rounds)
 }

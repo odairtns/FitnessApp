@@ -102,15 +102,33 @@ fun PersonalRecordsScreen(
                                         fontWeight = FontWeight.Bold,
                                         color = TextPrimary
                                     )
+                                    val typeLabel = when (pr.recordType) {
+                                        com.aksoit.myfitnessapp.domain.model.PersonalRecordType.MAX_LOAD -> "Carga Máxima (MAX_LOAD)"
+                                        com.aksoit.myfitnessapp.domain.model.PersonalRecordType.MAX_REPS -> "Repetições Máximas (MAX_REPS)"
+                                        com.aksoit.myfitnessapp.domain.model.PersonalRecordType.MAX_VOLUME -> "Volume Máximo (MAX_VOLUME)"
+                                        com.aksoit.myfitnessapp.domain.model.PersonalRecordType.BEST_TIME -> "Melhor Tempo (BEST_TIME)"
+                                        com.aksoit.myfitnessapp.domain.model.PersonalRecordType.BEST_PROTOCOL_RESULT -> "Melhor Resultado"
+                                    }
                                     Text(
-                                        text = pr.recordType.name,
+                                        text = typeLabel,
                                         style = MaterialTheme.typography.labelLarge,
                                         color = CyanPulse
                                     )
                                 }
 
+                                val formattedValue = when (pr.recordType) {
+                                    com.aksoit.myfitnessapp.domain.model.PersonalRecordType.MAX_LOAD -> "%.1f kg".format(pr.value).replace(',', '.')
+                                    com.aksoit.myfitnessapp.domain.model.PersonalRecordType.MAX_REPS -> "${pr.value.toInt()} reps"
+                                    com.aksoit.myfitnessapp.domain.model.PersonalRecordType.MAX_VOLUME -> "%.1f kg".format(pr.value).replace(',', '.')
+                                    com.aksoit.myfitnessapp.domain.model.PersonalRecordType.BEST_TIME -> {
+                                        val totalSec = pr.value.toLong()
+                                        "%02d:%02d".format(totalSec / 60, totalSec % 60)
+                                    }
+                                    com.aksoit.myfitnessapp.domain.model.PersonalRecordType.BEST_PROTOCOL_RESULT -> "%.1f".format(pr.value).replace(',', '.')
+                                }
+
                                 Text(
-                                    text = "%.1f kg".format(pr.value).replace(',', '.'),
+                                    text = formattedValue,
                                     fontSize = 24.sp,
                                     fontWeight = FontWeight.Black,
                                     color = SprintGreen
